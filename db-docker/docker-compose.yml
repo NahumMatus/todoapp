@@ -5,11 +5,14 @@ services:
     image: mysql:latest
     ports:
       - "3306:3306"
-    volumes:
-      - /var/lib/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: todoapp_db
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
       MYSQL_ROOT_HOST: '%'
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
+volumes:
+  db_data:
